@@ -1,0 +1,16 @@
+<p>bar works!</p>
+
+<table>
+  <thead>
+    <th *ngFor="let headerItem of headerItems">
+      {{ headerItem }}
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of dataSource">
+      <td>{{ row.description }}</td>
+      <td>{{ row.value }}</td>
+      <td>{{ row.amount }}</td>
+    </tr>
+  </tbody>
+</table>
