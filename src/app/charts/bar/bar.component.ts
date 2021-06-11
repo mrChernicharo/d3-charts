@@ -16,7 +16,7 @@ import * as d3 from 'd3';
 })
 export class BarComponent implements OnInit, OnChanges {
   @Input() dataSource: IBarData[];
-  headerItems = ['description', 'value', 'amount'];
+  headerItems = ['description', 'value', 'year'];
 
   constructor() {}
 
@@ -41,11 +41,10 @@ export class BarComponent implements OnInit, OnChanges {
   }
 
   update() {
+    const trans = d3.transition().duration(600);
+
     // Perform the data join
     const selection = d3.select('g').selectAll('circle').data(this.dataSource);
-
-    // Remove surplus elements
-    selection.exit().remove();
 
     // Add new elements
     selection
@@ -53,6 +52,7 @@ export class BarComponent implements OnInit, OnChanges {
       .append('circle')
       .attr('cx', (d, i) => i * 20 + 20)
       .attr('cy', (d, i) => i * 20 + 20)
+      .transition(trans)
       .attr('r', 7)
       .style('fill', 'blue');
 
@@ -62,5 +62,8 @@ export class BarComponent implements OnInit, OnChanges {
       .attr('cy', (d, i) => i * 20 + 20)
       .attr('r', 7)
       .style('fill', 'blue');
+
+    // Remove surplus elements
+    selection.exit().transition(trans).attr('r', 0).remove();
   }
 }

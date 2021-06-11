@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { initialBarData } from './utils/barHelper';
+import { createItem, initialBarData } from './utils/barHelper';
 import { vehicle } from 'faker';
 
 export interface IBarData {
-  amount: number;
+  year: number;
   value: number;
   description: string;
 }
@@ -22,14 +22,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 
   addItem() {
-    this.barData = [
-      ...this.barData,
-      {
-        description: vehicle.vehicle(),
-        amount: Math.ceil(Math.random() * 10_000),
-        value: Math.random() * 10_000_000,
-      },
-    ];
+    this.barData = [...this.barData, createItem()];
   }
 
   popItem() {

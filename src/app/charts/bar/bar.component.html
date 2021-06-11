@@ -2,19 +2,4 @@
   <p>Bar component</p>
 
   <div id="bar-chart"></div>
-
-  <table>
-    <thead>
-      <th *ngFor="let headerItem of headerItems">
-        {{ headerItem }}
-      </th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let row of dataSource">
-        <td>{{ row.description }}</td>
-        <td>{{ row.value | currency: "BRL" }}</td>
-        <td>{{ row.amount }}</td>
-      </tr>
-    </tbody>
-  </table>
 </div>
