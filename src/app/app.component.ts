@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { initialBarData } from './utils/barHelper';
+import { vehicle } from 'faker';
 
 export interface IBarData {
   amount: number;
@@ -22,7 +23,7 @@ export class AppComponent implements OnInit {
 
   addItem() {
     this.barData.push({
-      description: 'WHATEVER',
+      description: vehicle.vehicle(),
       amount: Math.ceil(Math.random() * 10_000),
       value: Math.random() * 10_000_000,
     });
