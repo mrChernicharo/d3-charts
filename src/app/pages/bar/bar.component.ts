@@ -16,20 +16,20 @@ import { createItem, initialCars } from 'src/app/utils/barHelper';
   styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit {
-  carsData: ICar[];
-  headerItems = ['description', 'value', 'year'];
+  // carsData: ICar[];
+  // headerItems = ['description', 'value', 'year'];
 
   constructor() {}
 
   ngOnInit() {
-    this.carsData = initialCars;
+    // this.carsData = initialCars;
   }
 
-  addCar() {
-    this.carsData = [...this.carsData, createItem()];
-  }
+  // addCar() {
+  //   this.carsData = [...this.carsData, createItem()];
+  // }
 
-  popCar() {
-    this.carsData = [...this.carsData.slice(0, this.carsData.length - 1)];
-  }
+  // popCar() {
+  //   this.carsData = [...this.carsData.slice(0, this.carsData.length - 1)];
+  // }
 }

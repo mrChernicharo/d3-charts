@@ -14,7 +14,6 @@ export interface ICar {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'D3 Charts';
   carsData: ICar[] = initialCars;
 
   constructor() {}
