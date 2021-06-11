@@ -22,14 +22,17 @@ export class AppComponent implements OnInit {
   ngOnInit() {}
 
   addItem() {
-    this.barData.push({
-      description: vehicle.vehicle(),
-      amount: Math.ceil(Math.random() * 10_000),
-      value: Math.random() * 10_000_000,
-    });
+    this.barData = [
+      ...this.barData,
+      {
+        description: vehicle.vehicle(),
+        amount: Math.ceil(Math.random() * 10_000),
+        value: Math.random() * 10_000_000,
+      },
+    ];
   }
 
   popItem() {
-    this.barData.pop();
+    this.barData = [...this.barData.slice(0, this.barData.length - 1)];
   }
 }

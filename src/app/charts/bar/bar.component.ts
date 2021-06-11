@@ -20,12 +20,15 @@ export class BarComponent implements OnInit, OnChanges {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.drawChart();
+    this.update();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
     if (changes.dataSource) {
-      this.drawChart();
+      this.update();
     }
   }
 
@@ -34,14 +37,30 @@ export class BarComponent implements OnInit, OnChanges {
 
     chart.append('svg').attr('width', '100%').attr('height', '100%');
 
-    d3.select('svg')
-      .selectAll('circle')
-      .data(this.dataSource)
+    const g = d3.select('svg').append('g');
+  }
+
+  update() {
+    // Perform the data join
+    const selection = d3.select('g').selectAll('circle').data(this.dataSource);
+
+    // Remove surplus elements
+    selection.exit().remove();
+
+    // Add new elements
+    selection
       .enter()
       .append('circle')
-      .attr('cx', (d, i) => i * 20)
-      .attr('cy', (d, i) => i * 20)
-      .attr('r', 6)
-      .attr('fill', 'blue');
+      .attr('cx', (d, i) => i * 20 + 20)
+      .attr('cy', (d, i) => i * 20 + 20)
+      .attr('r', 7)
+      .style('fill', 'blue');
+
+    // Update existing AND new elements
+    selection
+      .attr('cx', (d, i) => i * 20 + 20)
+      .attr('cy', (d, i) => i * 20 + 20)
+      .attr('r', 7)
+      .style('fill', 'blue');
   }
 }
