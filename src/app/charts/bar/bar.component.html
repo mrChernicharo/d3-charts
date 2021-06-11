@@ -1,16 +1,18 @@
-<p>bar works!</p>
+<div class="bar-component-container">
+  <p>Bar component</p>
 
-<table>
-  <thead>
-    <th *ngFor="let headerItem of headerItems">
-      {{ headerItem }}
-    </th>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of dataSource">
-      <td>{{ row.description }}</td>
-      <td>{{ row.value }}</td>
-      <td>{{ row.amount }}</td>
-    </tr>
-  </tbody>
-</table>
+  <table>
+    <thead>
+      <th *ngFor="let headerItem of headerItems">
+        {{ headerItem }}
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of dataSource">
+        <td>{{ row.description }}</td>
+        <td>{{ row.value | currency: "BRL" }}</td>
+        <td>{{ row.amount }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

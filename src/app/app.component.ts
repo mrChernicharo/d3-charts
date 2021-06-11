@@ -19,4 +19,16 @@ export class AppComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  addItem() {
+    this.barData.push({
+      description: 'WHATEVER',
+      amount: Math.ceil(Math.random() * 10_000),
+      value: Math.random() * 10_000_000,
+    });
+  }
+
+  popItem() {
+    this.barData.pop();
+  }
 }

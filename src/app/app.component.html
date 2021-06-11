@@ -1,6 +1,6 @@
 <h1>{{ title }}</h1>
 
-<app-bar [dataSource]="barData"></app-bar>
+<button (click)="addItem()">Add data point</button>
+<button (click)="popItem()">Remove data point</button>
 
-<button>Add data point</button>
-<button>Remove data point</button>
+<app-bar [dataSource]="barData"></app-bar>
