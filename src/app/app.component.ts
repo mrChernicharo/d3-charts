@@ -14,18 +14,10 @@ export interface ICar {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'd3-graphs';
-  barData: ICar[] = initialCars;
+  title = 'D3 Charts';
+  carsData: ICar[] = initialCars;
 
   constructor() {}
 
   ngOnInit() {}
-
-  addItem() {
-    this.barData = [...this.barData, createItem()];
-  }
-
-  popItem() {
-    this.barData = [...this.barData.slice(0, this.barData.length - 1)];
-  }
 }

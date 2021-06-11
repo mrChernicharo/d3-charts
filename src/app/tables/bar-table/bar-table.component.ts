@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ICar } from 'src/app/app.component';
 
 @Component({
-  selector: 'app-bar-table',
+  selector: 'app-bar-chart-table',
   templateUrl: './bar-table.component.html',
   styleUrls: ['./bar-table.component.scss'],
 })

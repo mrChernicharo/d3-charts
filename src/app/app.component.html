@@ -1,8 +1,7 @@
 <h1>{{ title }}</h1>
 
-<button (click)="addItem()">Add data point</button>
-<button (click)="popItem()">Remove data point</button>
+<a [routerLink]="['/']">Home</a>
+<a [routerLink]="['/basic-update']">Basic Update</a>
+<a [routerLink]="['/bar']">Bar Chart</a>
 
-<app-bar [dataSource]="barData"></app-bar>
-
-<app-bar-table [dataSource]="barData"></app-bar-table>
+<router-outlet></router-outlet>

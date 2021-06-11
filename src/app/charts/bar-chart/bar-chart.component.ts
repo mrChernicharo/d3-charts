@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   Input,
   OnChanges,
@@ -10,11 +9,11 @@ import { ICar } from 'src/app/app.component';
 import * as d3 from 'd3';
 
 @Component({
-  selector: 'app-bar',
-  templateUrl: './bar.component.html',
-  styleUrls: ['./bar.component.scss'],
+  selector: 'app-bar-chart',
+  templateUrl: './bar-chart.component.html',
+  styleUrls: ['./bar-chart.component.scss'],
 })
-export class BarComponent implements OnInit, OnChanges {
+export class BarChartComponent implements OnInit, OnChanges {
   @Input() dataSource: ICar[];
   headerItems = ['description', 'value', 'year'];
 
