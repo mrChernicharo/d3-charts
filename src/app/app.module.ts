@@ -6,15 +6,9 @@ import { AppComponent } from './app.component';
 import { BarComponent } from './charts/bar/bar.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BarComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, BarComponent],
+  imports: [BrowserModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

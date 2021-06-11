@@ -7,7 +7,7 @@ import { IBarData } from 'src/app/app.component';
   styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit {
-  @Input() dataSource: IBarData;
+  @Input() dataSource: IBarData[];
   headerItems = ['description', 'value', 'amount'];
 
   constructor() {}
