@@ -1,15 +1,15 @@
 import * as faker from 'faker';
-import { IBarData } from '../app.component';
+import { ICar } from '../app.component';
 
 export const createItem = () => {
-  const item: IBarData = {
+  const item: ICar = {
     description: faker.vehicle.vehicle(),
-    year: Math.floor(Math.random() * 52) + 1970,
-    value: Math.floor(Math.random() * 400_000) + 10_000,
+    year: Math.floor(Math.random() * 52) + 1970, // 1970 - 2021
+    value: Math.floor(Math.random() * 400_001) + 10_000, // 10_000 - 410_000
   };
   return item;
 };
 
-export const initialBarData = Array(5)
+export const initialCars = Array(5)
   .fill({})
   .map((item) => createItem());

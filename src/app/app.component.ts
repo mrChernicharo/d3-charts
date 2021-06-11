@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { createItem, initialBarData } from './utils/barHelper';
+import { createItem, initialCars } from './utils/barHelper';
 import { vehicle } from 'faker';
 
-export interface IBarData {
+export interface ICar {
   year: number;
   value: number;
   description: string;
@@ -15,7 +15,7 @@ export interface IBarData {
 })
 export class AppComponent implements OnInit {
   title = 'd3-graphs';
-  barData: IBarData[] = initialBarData;
+  barData: ICar[] = initialCars;
 
   constructor() {}
 

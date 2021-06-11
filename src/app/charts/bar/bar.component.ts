@@ -6,7 +6,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { IBarData } from 'src/app/app.component';
+import { ICar } from 'src/app/app.component';
 import * as d3 from 'd3';
 
 @Component({
@@ -15,7 +15,7 @@ import * as d3 from 'd3';
   styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit, OnChanges {
-  @Input() dataSource: IBarData[];
+  @Input() dataSource: ICar[];
   headerItems = ['description', 'value', 'year'];
 
   constructor() {}
