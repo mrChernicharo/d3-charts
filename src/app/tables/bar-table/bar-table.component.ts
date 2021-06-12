@@ -7,7 +7,7 @@ import { ICar } from 'src/app/app.component';
   styleUrls: ['./bar-table.component.scss'],
 })
 export class BarTableComponent implements OnInit {
-  // @Input() dataSource: ICar[];
+  @Input() dataSource: ICar[];
 
   constructor() {}
 

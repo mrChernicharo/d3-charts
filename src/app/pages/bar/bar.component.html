@@ -1,10 +1,14 @@
+<!-- <div (window:resize)="onResize($event)"></div> -->
 <p>Bar component works!</p>
 
 <a [routerLink]="['/']">Home</a>
 
-<!-- <button (click)="addCar()">Add data point</button>
+<app-bar-chart
+  [dataSource]="carsData"
+  [availableWidth]="windowWidth"
+></app-bar-chart>
+
+<button (click)="addCar()">Add data point</button>
 <button (click)="popCar()">Remove data point</button>
 
-<app-bar-chart [dataSource]="carsData"></app-bar-chart>
-
-<app-bar-chart-table [dataSource]="carsData"></app-bar-chart-table> -->
+<app-bar-chart-table [dataSource]="carsData"></app-bar-chart-table>

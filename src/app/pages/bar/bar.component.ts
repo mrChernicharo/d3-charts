@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostListener,
   Input,
+  NgZone,
   OnChanges,
   OnInit,
   SimpleChanges,
@@ -16,20 +18,26 @@ import { createItem, initialCars } from 'src/app/utils/barHelper';
   styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit {
-  // carsData: ICar[];
-  // headerItems = ['description', 'value', 'year'];
+  carsData: ICar[];
+  windowWidth: number;
 
   constructor() {}
 
   ngOnInit() {
-    // this.carsData = initialCars;
+    this.carsData = initialCars;
+    this.windowWidth = window.innerWidth;
   }
 
-  // addCar() {
-  //   this.carsData = [...this.carsData, createItem()];
-  // }
+  addCar() {
+    this.carsData = [...this.carsData, createItem()];
+  }
 
-  // popCar() {
-  //   this.carsData = [...this.carsData.slice(0, this.carsData.length - 1)];
-  // }
+  popCar() {
+    this.carsData = [...this.carsData.slice(0, this.carsData.length - 1)];
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.windowWidth = event.target.innerWidth;
+  }
 }
