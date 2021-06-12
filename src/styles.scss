@@ -5,3 +5,10 @@
   box-sizing: border-box;
   font-family: monospace;
 }
+a {
+  text-decoration: none;
+  padding-right: 1rem;
+}
+a.current {
+  color: orange;
+}

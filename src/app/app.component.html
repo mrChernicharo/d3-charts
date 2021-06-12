@@ -1,8 +1,11 @@
 <nav>
   <h3>D3 Charts</h3>
-  <a [routerLink]="['/']">Home</a>
-  <a [routerLink]="['/basic-update']">Basic Update</a>
-  <a [routerLink]="['/bar']">Bar Chart</a>
+
+  <div>
+    <a routerLink="/">Home</a>
+    <a [routerLink]="['/basic-update']">Basic Update</a>
+    <a [routerLink]="['/', 'bar']">Bar Chart</a>
+  </div>
 </nav>
 
 <router-outlet></router-outlet>

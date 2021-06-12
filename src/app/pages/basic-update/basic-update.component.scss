@@ -1,0 +1,14 @@
+@mixin appbox {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.btns-group {
+  @include appbox();
+  justify-content: center;
+}
+.top-group {
+  @include appbox();
+  justify-content: space-between;
+}

@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { createItem, initialCars } from './utils/barHelper';
 import { vehicle } from 'faker';
+import {
+  ActivatedRoute,
+  ActivatedRouteSnapshot,
+  ActivationEnd,
+  NavigationEnd,
+  Route,
+  Router,
+  Routes,
+} from '@angular/router';
+import { filter, tap } from 'rxjs/operators';
 
 export interface ICar {
   year: number;
@@ -15,8 +25,17 @@ export interface ICar {
 })
 export class AppComponent implements OnInit {
   carsData: ICar[] = initialCars;
+  currentUrl = '/';
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.router.events
+      .pipe(
+        filter((e) => e instanceof NavigationEnd),
+        tap((e: NavigationEnd) => (this.currentUrl = e.url))
+      )
+      .subscribe(() => console.log(this.currentUrl));
+    // this.
+  }
 }

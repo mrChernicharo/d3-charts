@@ -1,9 +1,13 @@
-<p>basic-update works!</p>
-<a [routerLink]="['/']">Home</a>
-
-<button (click)="addCar()">Add data point</button>
-<button (click)="popCar()">Remove data point</button>
+<div class="top-group">
+  <h1>Basic Update</h1>
+  <a [routerLink]="['/']"> ⬅ </a>
+</div>
 
 <app-basic-update-chart [dataSource]="carsData"></app-basic-update-chart>
+
+<div class="btns-group">
+  <button (click)="addCar()">Add data point</button>
+  <button (click)="popCar()">Remove data point</button>
+</div>
 
 <app-basic-update-table [dataSource]="carsData"></app-basic-update-table>
