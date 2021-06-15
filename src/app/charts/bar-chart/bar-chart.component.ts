@@ -40,7 +40,7 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('width', this.availableWidth - this.margins * 2)
       .attr('height', '100%')
       .style('border', '1px solid green')
-      .style('transform', 'translateX(48px)'); // margin - borders
+      .style('transform', 'translateX(48px) rotateX(180deg)'); // margin - borders
 
     const g = d3.select('svg').append('g');
   }
@@ -50,28 +50,38 @@ export class BarChartComponent implements OnInit, OnChanges {
     const width = this.availableWidth - this.margins * 2;
     d3.select('svg').attr('width', width);
 
+    // transition
     const trans = d3.transition().duration(600);
 
     // Perform the data join
     const selection = d3.select('g').selectAll('rect').data(this.dataSource);
 
+    const barAttrs = {
+      width: 20,
+      fill: 'blue',
+      transform: 'translateX(-10px)',
+    };
+
     // Add new elements
     selection
       .enter()
       .append('rect')
-      .attr('y', 0)
-      .attr('x', (d, i, arr) => (width / arr.length) * i + 10)
+      .attr('x', (d, i, arr) => (width / (arr.length + 1)) * (i + 1))
       .attr('width', 20)
+      .style('transform', 'translateX(-10px)')
       .style('fill', 'blue')
       .transition(trans)
-      .attr('height', (d, i) => d.value / 1000);
+      .attr('y', 0)
+      .attr('height', (d, i) => d.value / 1200);
 
     // Update existing AND new elements
     selection
-      .attr('x', (d, i, arr) => (width / arr.length) * i + 10)
+      .transition(trans)
+      .attr('x', (d, i, arr) => (width / (arr.length + 1)) * (i + 1))
       .attr('y', 0)
       .attr('width', 20)
-      .attr('height', (d, i) => d.value / 1000)
+      .attr('height', (d, i) => d.value / 1200)
+      .style('transform', 'translateX(-10px)')
       .style('fill', 'blue');
 
     // Remove surplus elements
