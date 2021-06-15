@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICar } from 'src/app/app.component';
+import { ICar } from '../../utils/barHelper';
 
 @Component({
   selector: 'app-bar-chart-table',

@@ -1,10 +1,9 @@
 <!-- <div (window:resize)="onResize($event)"></div> -->
-<a [routerLink]="['/']">Home</a>
+<!-- <a [routerLink]="['/']">Home</a> -->
 
-<app-bar-chart
-  [dataSource]="carsData"
-  [availableWidth]="windowWidth"
-></app-bar-chart>
+<app-page-header [pageTitle]="title"></app-page-header>
+
+<app-bar-chart [dataSource]="carsData" [availableWidth]="windowWidth"></app-bar-chart>
 
 <button (click)="addCar()">Add data point</button>
 <button (click)="popCar()">Remove data point</button>

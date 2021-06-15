@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { BarComponent } from './pages/bar/bar.component';
 import { BasicUpdateComponent } from './pages/basic-update/basic-update.component';
 import { HomeComponent } from './pages/home/home.component';
-import { initialCars } from './utils/barHelper';
+import { PieComponent } from './pages/pie/pie.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'basic-update', component: BasicUpdateComponent },
   { path: 'bar', component: BarComponent },
+  { path: 'pie', component: PieComponent },
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { createItem, initialCars } from './utils/barHelper';
+import { createItem, ICar, initialCars } from './utils/barHelper';
 import { vehicle } from 'faker';
 import {
   ActivatedRoute,
@@ -11,12 +11,6 @@ import {
   Routes,
 } from '@angular/router';
 import { filter, tap } from 'rxjs/operators';
-
-export interface ICar {
-  year: number;
-  value: number;
-  description: string;
-}
 
 @Component({
   selector: 'app-root',

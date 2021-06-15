@@ -8,7 +8,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { ICar } from '../../app.component';
+import { ICar } from '../../utils/barHelper';
 import * as d3 from 'd3';
 import { createItem, initialCars } from 'src/app/utils/barHelper';
 
@@ -18,6 +18,7 @@ import { createItem, initialCars } from 'src/app/utils/barHelper';
   styleUrls: ['./bar.component.scss'],
 })
 export class BarComponent implements OnInit {
+  title = 'Bar';
   carsData: ICar[];
   windowWidth: number;
 

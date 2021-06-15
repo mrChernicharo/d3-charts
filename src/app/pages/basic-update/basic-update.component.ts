@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICar } from 'src/app/app.component';
+import { ICar } from '../../utils/barHelper';
 import { initialCars, createItem } from 'src/app/utils/barHelper';
 
 @Component({
@@ -8,6 +8,7 @@ import { initialCars, createItem } from 'src/app/utils/barHelper';
   styleUrls: ['./basic-update.component.scss'],
 })
 export class BasicUpdateComponent implements OnInit {
+  title = 'D3 Basic Update';
   carsData: ICar[];
   headerItems = ['description', 'value', 'year'];
 

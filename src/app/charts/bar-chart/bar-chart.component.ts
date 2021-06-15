@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { ICar } from 'src/app/app.component';
+import { ICar } from '../../utils/barHelper';
 import * as d3 from 'd3';
 
 @Component({

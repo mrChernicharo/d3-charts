@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { select, transition } from 'd3';
-import { ICar } from 'src/app/app.component';
+import { ICar } from '../../utils/barHelper';
 
 @Component({
   selector: 'app-basic-update-chart',

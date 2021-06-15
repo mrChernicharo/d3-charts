@@ -1,5 +1,10 @@
 import * as faker from 'faker';
-import { ICar } from '../app.component';
+
+export interface ICar {
+  year: number;
+  value: number;
+  description: string;
+}
 
 export const createItem = () => {
   const item: ICar = {
