@@ -12,3 +12,14 @@ a {
 a.current {
   color: orange;
 }
+button {
+  padding: 0.5rem;
+  border: none;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

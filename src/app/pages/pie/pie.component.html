@@ -2,7 +2,7 @@
 
 <app-pie-chart [dataSource]="selectedCity" [availableWidth]="windowWidth"></app-pie-chart>
 
-<button (click)="toggleLeft()">-</button>
-<button (click)="toggleRight()">+</button>
+<button (click)="toggleLeft()">&nbsp;&lt;&nbsp;</button>
+<button (click)="toggleRight()">&nbsp;&gt;&nbsp;</button>
 
 <app-pie-table [dataSource]="citiesData"></app-pie-table>
