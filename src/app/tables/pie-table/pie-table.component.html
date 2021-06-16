@@ -1,6 +1,6 @@
-<!-- <table>
+<table>
   <thead>
-    <th *ngFor="let headerItem of ['description', 'value', 'year']">
+    <th *ngFor="let headerItem of ['name', 'country', 'population', 'flag']">
       {{ headerItem }}
     </th>
   </thead>
@@ -9,9 +9,10 @@
       *ngFor="let row of dataSource; even as isEven"
       [ngStyle]="{ background: isEven ? 'lightblue' : 'white' }"
     >
-      <td>{{ row.description }}</td>
-      <td>{{ row.value | currency }}</td>
-      <td>{{ row.year }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.country }}</td>
+      <td>{{ row.population }}</td>
+      <td>{{ row.flag }}</td>
     </tr>
   </tbody>
-</table> -->
+</table>

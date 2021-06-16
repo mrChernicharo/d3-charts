@@ -1,11 +1,8 @@
 <app-page-header [pageTitle]="title"></app-page-header>
 
-<!-- <app-bar-chart
-  [dataSource]="carsData"
-  [availableWidth]="windowWidth"
-></app-bar-chart>
+<app-pie-chart [dataSource]="selectedCity" [availableWidth]="windowWidth"></app-pie-chart>
 
-<button (click)="addCar()">Add data point</button>
-<button (click)="popCar()">Remove data point</button>
+<button (click)="toggleLeft()">-</button>
+<button (click)="toggleRight()">+</button>
 
-<app-bar-chart-table [dataSource]="carsData"></app-bar-chart-table> -->
+<app-pie-table [dataSource]="citiesData"></app-pie-table>
