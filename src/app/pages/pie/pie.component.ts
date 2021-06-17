@@ -8,8 +8,10 @@ import { cities, ICity } from 'src/app/utils/pieHelper';
 })
 export class PieComponent implements OnInit {
   title = 'Pie';
-  citiesData: ICity[];
   windowWidth: number;
+  chartMargins: number;
+
+  citiesData: ICity[];
   selectedCity: ICity;
   pointer = 0;
 
@@ -17,7 +19,8 @@ export class PieComponent implements OnInit {
 
   ngOnInit(): void {
     this.citiesData = cities;
-    this.windowWidth = window.innerWidth;
+
+    this.onResize();
     this.updateSelectedCity();
   }
 
@@ -35,7 +38,8 @@ export class PieComponent implements OnInit {
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize(event) {
-    this.windowWidth = event.target.innerWidth;
+  onResize() {
+    this.windowWidth = window.innerWidth;
+    this.chartMargins = this.windowWidth < 600 ? 0 : 50;
   }
 }

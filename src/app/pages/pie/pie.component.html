@@ -1,6 +1,10 @@
 <app-page-header [pageTitle]="title"></app-page-header>
 
-<app-pie-chart [dataSource]="selectedCity" [availableWidth]="windowWidth"></app-pie-chart>
+<app-pie-chart
+  [dataSource]="selectedCity"
+  [availableWidth]="windowWidth"
+  [margins]="chartMargins"
+></app-pie-chart>
 
 <button (click)="toggleLeft()">&nbsp;&lt;&nbsp;</button>
 <button (click)="toggleRight()">&nbsp;&gt;&nbsp;</button>

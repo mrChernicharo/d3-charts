@@ -21,6 +21,7 @@ export class BarComponent implements OnInit {
   title = 'Bar';
   carsData: ICar[];
   windowWidth: number;
+  chartMargins: number;
 
   constructor() {}
 
@@ -40,5 +41,6 @@ export class BarComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.windowWidth = event.target.innerWidth;
+    this.chartMargins = this.windowWidth < 500 ? 0 : 50;
   }
 }

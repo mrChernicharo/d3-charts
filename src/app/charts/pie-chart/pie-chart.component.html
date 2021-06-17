@@ -1,4 +1,8 @@
 <div class="pie-component-container">
+  <div class="display">
+    <h2>{{ dataSource.name }} {{ dataSource.flag }}</h2>
+    <p>Total Population: {{ dataSource.population }}</p>
+  </div>
+
   <div id="pie-chart"></div>
-  <p>{{ dataSource | json }}</p>
 </div>

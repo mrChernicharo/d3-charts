@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ICar } from '../../utils/barHelper';
 import * as d3 from 'd3';
 
@@ -55,12 +49,6 @@ export class BarChartComponent implements OnInit, OnChanges {
 
     // Perform the data join
     const selection = d3.select('g').selectAll('rect').data(this.dataSource);
-
-    const barAttrs = {
-      width: 20,
-      fill: 'blue',
-      transform: 'translateX(-10px)',
-    };
 
     // Add new elements
     selection
