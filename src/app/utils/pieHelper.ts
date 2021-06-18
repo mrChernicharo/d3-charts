@@ -43,4 +43,18 @@ export const cities: ICity[] = [
     flag: '🇦🇺',
     ageGroups: [6.82, 18.1, 48.38, 18.1, 8.6],
   },
+  {
+    name: 'Bangkok',
+    country: 'Thailand',
+    population: 7_234_478,
+    flag: '🇹🇭',
+    ageGroups: [7.82, 19.1, 46.38, 26.7],
+  },
+  {
+    name: 'Bogota',
+    country: 'Colombia',
+    population: 8_123_000,
+    flag: '🇨🇴',
+    ageGroups: [11.82, 54.48, 23.7],
+  },
 ];

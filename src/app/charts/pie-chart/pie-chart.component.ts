@@ -87,11 +87,11 @@ export class PieChartComponent implements OnInit, OnChanges {
       )
       .attr('fill', (_, i) => this.colors[i]);
 
-    selection.exit().remove();
+    selection.exit().transition(trans).remove();
 
-    d3.select('g')
-      .selectAll('text')
-      .data(pieData)
+    const textSelection = d3.select('g').selectAll('text').data(pieData);
+
+    textSelection
       .enter()
       .append('text')
       .attr('x', (d) => arcsGen.centroid(d as any)[0])
@@ -102,11 +102,12 @@ export class PieChartComponent implements OnInit, OnChanges {
       .attr('alignment-baseline', 'text-after-edge') // middle, hanging, central,  after-edge | text-after-edge
       .text((d) => Math.floor(this.dataSource.population / d.data));
 
-    d3.select('g')
-      .selectAll('text')
+    textSelection
       .transition(trans)
       .attr('x', (d) => arcsGen.centroid(d as any)[0] * 1.4)
       .attr('y', (d) => arcsGen.centroid(d as any)[1] * 1.4)
       .text((d) => Math.floor(this.dataSource.population / (d as any).data));
+
+    textSelection.exit().transition().duration(100).attr('fill', 0).remove();
   }
 }
