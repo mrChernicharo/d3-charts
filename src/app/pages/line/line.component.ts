@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { cities, ICity } from 'src/app/utils/pieHelper';
+import { ILineData, lineValues } from '../../utils/lineHelper';
 
 @Component({
   selector: 'app-line',
@@ -11,12 +11,12 @@ export class LineComponent implements OnInit {
   windowWidth: number;
   chartMargins: number;
 
-  citiesData: ICity[];
+  data: ILineData[] = [];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.citiesData = cities;
+    this.data = lineValues;
 
     this.onResize();
   }
