@@ -1,11 +1,13 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import * as d3 from 'd3';
+import { CurrencyPipe } from '@angular/common';
 import { ILineData } from 'src/app/utils/lineHelper';
+import * as d3 from 'd3';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
+  providers: [CurrencyPipe],
 })
 export class LineChartComponent implements OnInit {
   @Input() data: ILineData[];
@@ -15,7 +17,8 @@ export class LineChartComponent implements OnInit {
   colors = ['orange', 'orangered', 'red', 'crimson'];
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
-  constructor() {}
+
+  constructor(private currencyPipe: CurrencyPipe) {}
 
   ngOnInit(): void {
     this.drawChart();
@@ -71,9 +74,10 @@ export class LineChartComponent implements OnInit {
       .scaleLinear()
       .domain([
         Math.max(...this.data.map((v) => v.value)) * 1.2,
-        Math.min(...this.data.map((v) => v.value)) * 0.1,
+        // Math.min(...this.data.map((v) => v.value)) * 0.1,
+        0,
       ])
-      .range([this.margins.bottom, this.height - this.margins.top]);
+      .range([this.margins.top, this.height - this.margins.bottom]);
 
     const yAxis = d3
       .axisLeft(yScale)
@@ -84,7 +88,7 @@ export class LineChartComponent implements OnInit {
 
     d3.select('.y-axis')
       .call(yAxis)
-      .attr('transform', `translate(${this.margins.left}, -12)`)
+      .attr('transform', `translate(${this.margins.left}, 0)`)
       .selectAll('line')
       .attr('opacity', 0.3);
 
@@ -142,14 +146,15 @@ export class LineChartComponent implements OnInit {
 
     d3.selectAll('.dot')
       .on('mousemove', (e: MouseEvent, d: ILineData) => {
-        const currFormater = d3.format('($.2f');
-        console.log({ e, d });
+        // const currFormater = d3.format('($.2f');
+        // console.log({ e, d });
         tooltip
           .transition()
           .style('opacity', 1)
           .style('top', `${e.y - 50}px`)
           .style('left', `${e.x - 100}px`)
-          .text(currFormater(d.value));
+          .text(this.currencyPipe.transform(d.value));
+        // .text(currFormater(d.value));
       })
       .on('mouseout', () => {
         tooltip.style('opacity', 0);

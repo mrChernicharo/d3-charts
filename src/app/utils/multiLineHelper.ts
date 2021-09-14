@@ -22,14 +22,14 @@ const valuesFactory = (): IMultiLineData[] => {
     .fill(0)
     .map((d, i) => ({
       timestamp: timestampsArray[i],
-      value: datatype.number({ min: 1_000, max: 470_000 }),
+      value: datatype.number({ min: 20_000, max: 400_000 }),
     }));
 };
 
 const line1Values = valuesFactory();
 const line2Values = valuesFactory();
-const line3Values = valuesFactory();
-const line4Values = valuesFactory();
+// const line3Values = valuesFactory();
+// const line4Values = valuesFactory();
 
 export const multiLinesDataset: IMultiLineDataset = {
   line1: line1Values,
