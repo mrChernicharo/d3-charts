@@ -16,7 +16,7 @@ export class MultiLineComponent implements OnInit {
   windowWidth: number;
   chartMargins: number;
 
-  data: IMultiLineDataset = {};
+  data = multiLinesDataset;
 
   constructor() {}
 

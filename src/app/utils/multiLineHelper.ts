@@ -6,7 +6,8 @@ export type IMultiLineData = {
 };
 
 export type IMultiLineDataset = {
-  [key: string]: IMultiLineData[];
+  line1: IMultiLineData[];
+  line2: IMultiLineData[];
 };
 
 const timestampsArray = [
@@ -33,8 +34,6 @@ const line4Values = valuesFactory();
 export const multiLinesDataset: IMultiLineDataset = {
   line1: line1Values,
   line2: line2Values,
-  line3: line3Values,
-  line4: line4Values,
 };
 
 console.log(multiLinesDataset);
