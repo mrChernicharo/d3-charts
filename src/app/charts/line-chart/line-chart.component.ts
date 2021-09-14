@@ -146,18 +146,21 @@ export class LineChartComponent implements OnInit {
 
     d3.selectAll('.dot')
       .on('mousemove', (e: MouseEvent, d: ILineData) => {
-        // const currFormater = d3.format('($.2f');
-        // console.log({ e, d });
+        const [x, y] = [e.x, e.y];
+
         tooltip
           .transition()
           .style('opacity', 1)
           .style('top', `${e.y - 50}px`)
-          .style('left', `${e.x - 100}px`)
+          .style('left', `${e.x > this.availableWidth / 2 ? e.x - 100 + 'px' : 'unset'}`)
+          .style(
+            'right',
+            `${e.x < this.availableWidth / 2 ? this.availableWidth - 100 - e.x + 'px' : 'unset'}`
+          )
           .text(this.currencyPipe.transform(d.value));
-        // .text(currFormater(d.value));
       })
       .on('mouseout', () => {
-        tooltip.style('opacity', 0);
+        tooltip.transition().style('opacity', 0);
       });
   }
 }

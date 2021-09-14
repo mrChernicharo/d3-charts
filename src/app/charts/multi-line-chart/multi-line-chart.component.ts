@@ -155,11 +155,17 @@ export class MultiLineChartComponent implements OnInit {
 
     d3.selectAll('.dot')
       .on('mousemove', (e: MouseEvent, d: IMultiLineData) => {
+        const [x, y] = [e.x, e.y];
+
         tooltip
           .transition()
           .style('opacity', 1)
           .style('top', `${e.y - 50}px`)
-          .style('left', `${e.x - 100}px`)
+          .style('left', `${e.x > this.availableWidth / 2 ? e.x - 100 + 'px' : 'unset'}`)
+          .style(
+            'right',
+            `${e.x < this.availableWidth / 2 ? this.availableWidth - 100 - e.x + 'px' : 'unset'}`
+          )
           .text(this.currencyPipe.transform(d.value));
       })
       .on('mouseout', () => {
