@@ -24,8 +24,8 @@ export class LineChartComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log(changes);
-    if (changes.dataSource || changes.availableWidth) {
+    console.log(changes);
+    if (changes.data || changes.availableWidth) {
       this.update();
     }
   }
@@ -95,7 +95,7 @@ export class LineChartComponent implements OnInit {
       .curve(d3.curveCardinal.tension(0.7));
 
     d3.select('.line-path')
-      // .data(this.data)
+      .transition()
       .attr('d', lineGen(this.data as any))
       .attr('stroke', this.colors[0])
       .attr('stroke-width', 2)
@@ -112,18 +112,18 @@ export class LineChartComponent implements OnInit {
       .attr('stroke-width', 2)
       .attr('cx', (d) => xScale(d.timestamp))
       .attr('cy', (d) => yScale(d.value))
-      .attr('r', 3)
+      .attr('r', 0)
       .style('cursor', 'pointer');
 
     dots
-      .attr('cx', (d) => xScale(d.timestamp))
+      .transition()
       .attr('cy', (d) => yScale(d.value))
+      .attr('cx', (d) => xScale(d.timestamp))
       .attr('r', 3);
 
     dots.exit().remove();
 
     const tooltip = d3
-      // .select('svg')
       .select('.line-chart')
       .append('div')
       .attr('class', 'tooltip')
@@ -136,6 +136,7 @@ export class LineChartComponent implements OnInit {
       .style('width', '84px')
       .style('display', 'flex')
       .style('align-items', 'center')
+      .style('pointer-events', 'none')
       .style('justify-content', 'center');
 
     d3.selectAll('.dot')
