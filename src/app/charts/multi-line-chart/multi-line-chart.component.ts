@@ -3,11 +3,11 @@ import * as d3 from 'd3';
 import { ILineData } from 'src/app/utils/lineHelper';
 
 @Component({
-  selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.scss'],
+  selector: 'app-multi-line-chart',
+  templateUrl: './multi-line-chart.component.html',
+  styleUrls: ['./multi-line-chart.component.scss'],
 })
-export class LineChartComponent implements OnInit {
+export class MultiLineChartComponent implements OnInit {
   @Input() data: ILineData[];
   @Input() availableWidth: number;
   @Input() outerMargins: number;
@@ -31,7 +31,7 @@ export class LineChartComponent implements OnInit {
   }
 
   drawChart() {
-    d3.select('.line-chart')
+    d3.select('.mulit-line-chart')
       .append('svg')
       .attr('height', this.height)
       .attr('width', `${this.availableWidth - this.outerMargins}`)
@@ -125,7 +125,7 @@ export class LineChartComponent implements OnInit {
     dots.exit().remove();
 
     const tooltip = d3
-      .select('.line-chart')
+      .select('.multi-line-chart')
       .append('div')
       .attr('class', 'tooltip')
       .style('position', 'absolute')

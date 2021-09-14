@@ -1,0 +1,14 @@
+<app-page-header [pageTitle]="title"></app-page-header>
+
+<app-multi-line-chart
+  [data]="data"
+  [availableWidth]="windowWidth"
+  [outerMargins]="chartMargins"
+></app-multi-line-chart>
+
+<div class="btn-container">
+  <button (click)="remove()">Remove point</button> |
+  <button (click)="add()">Add Point</button>
+</div>
+
+<!-- <app-line-table [dataSource]="data"></app-line-table> -->

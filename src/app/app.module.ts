@@ -12,6 +12,7 @@ import { BasicUpdateModule } from './pages/basic-update/basic-update.module';
 import { BarModule } from './pages/bar/bar.module';
 import { PieModule } from './pages/pie/pie.module';
 import { LineModule } from './pages/line/line.module';
+import { MultiLineModule } from './pages/multi-line/multi-line.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -25,6 +26,7 @@ import { LineModule } from './pages/line/line.module';
     BarModule,
     PieModule,
     LineModule,
+    MultiLineModule,
   ],
   bootstrap: [AppComponent],
 })
