@@ -1,1 +1,16 @@
-<p>line-table works!</p>
+<table>
+  <thead>
+    <th *ngFor="let headerItem of ['date', 'value']">
+      {{ headerItem }}
+    </th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let row of dataSource; even as isEven"
+      [ngStyle]="{ background: isEven ? 'lightblue' : 'white' }"
+    >
+      <td>{{ row.timestamp | date }}</td>
+      <td class="curr">{{ row.value | currency }}</td>
+    </tr>
+  </tbody>
+</table>

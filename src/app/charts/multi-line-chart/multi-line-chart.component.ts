@@ -15,7 +15,7 @@ export class MultiLineChartComponent implements OnInit {
   @Input() outerMargins: number;
   height = 400;
   // colors = ['orange', 'orangered', 'red', 'crimson'];
-  colors = ['orange', 'blue', 'red', 'green'];
+  colors = ['royalblue', 'dodgerblue', 'lightblue'];
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
   constructor(private currencyPipe: CurrencyPipe) {}

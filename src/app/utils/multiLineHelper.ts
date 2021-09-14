@@ -8,6 +8,8 @@ export type IMultiLineData = {
 export type IMultiLineDataset = {
   line1: IMultiLineData[];
   line2: IMultiLineData[];
+  line3: IMultiLineData[];
+  // line4: IMultiLineData[];
 };
 
 const timestampsArray = [
@@ -17,23 +19,25 @@ const timestampsArray = [
   1622898080000, 1622811680000, 1622725280000, 1622638880000, 1622552480000, 1622466080000,
 ].reverse();
 
-const valuesFactory = (): IMultiLineData[] => {
+const valuesFactory = (min: number, max: number): IMultiLineData[] => {
   return Array(24)
     .fill(0)
     .map((d, i) => ({
       timestamp: timestampsArray[i],
-      value: datatype.number({ min: 20_000, max: 400_000 }),
+      value: datatype.number({ min, max }),
     }));
 };
 
-const line1Values = valuesFactory();
-const line2Values = valuesFactory();
-// const line3Values = valuesFactory();
+const line1Values = valuesFactory(10_000, 100_000);
+const line2Values = valuesFactory(100_000, 200_000);
+const line3Values = valuesFactory(200_000, 400_000);
 // const line4Values = valuesFactory();
 
 export const multiLinesDataset: IMultiLineDataset = {
   line1: line1Values,
   line2: line2Values,
+  line3: line3Values,
+  // line4: line4Values,
 };
 
 console.log(multiLinesDataset);

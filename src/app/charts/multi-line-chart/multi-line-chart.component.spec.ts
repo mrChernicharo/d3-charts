@@ -8,9 +8,8 @@ describe('MultiLineChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MultiLineChartComponent ]
-    })
-    .compileComponents();
+      declarations: [MultiLineChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
