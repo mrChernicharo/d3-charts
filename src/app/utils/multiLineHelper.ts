@@ -28,9 +28,15 @@ const valuesFactory = (min: number, max: number): IMultiLineData[] => {
     }));
 };
 
-const line1Values = valuesFactory(10_000, 100_000);
-const line2Values = valuesFactory(100_000, 200_000);
-const line3Values = valuesFactory(200_000, 400_000);
+export const lineMinMax = {
+  line1: { min: 10_000, max: 100_000 },
+  line2: { min: 100_000, max: 200_000 },
+  line3: { min: 200_000, max: 400_000 },
+};
+
+const line1Values = valuesFactory(lineMinMax.line1.min, lineMinMax.line1.max);
+const line2Values = valuesFactory(lineMinMax.line2.min, lineMinMax.line2.max);
+const line3Values = valuesFactory(lineMinMax.line3.min, lineMinMax.line3.max);
 // const line4Values = valuesFactory();
 
 export const multiLinesDataset: IMultiLineDataset = {

@@ -7,20 +7,18 @@ import { IMultiLineData, IMultiLineDataset } from 'src/app/utils/multiLineHelper
   styleUrls: ['./multi-line-table.component.scss'],
 })
 export class MultiLineTableComponent implements OnInit {
-  @Input() dataSource: IMultiLineDataset;
+  // @Input() dataSource: IMultiLineDataset;
 
-  lines: IMultiLineData[][];
-  linesNames: string[] = [];
+  @Input() linesData: IMultiLineData[][];
+  @Input() linesNames: string[] = [];
 
   colors = ['royalblue', 'dodgerblue', 'lightblue'];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.linesNames = Object.keys(this.dataSource);
-
-    this.lines = this.linesNames.map((line) => this.dataSource[line]);
-
-    console.log(this.lines);
+    // this.linesNames = Object.keys(this.dataSource);
+    // this.lines = this.linesNames.map((line) => this.dataSource[line]);
+    console.log(this.linesData);
   }
 }

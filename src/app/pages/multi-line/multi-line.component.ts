@@ -1,10 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { datatype } from 'faker';
-import {
-  IMultiLineData,
-  IMultiLineDataset,
-  multiLinesDataset,
-} from 'src/app/utils/multiLineHelper';
+import { IMultiLineData, lineMinMax, multiLinesDataset } from 'src/app/utils/multiLineHelper';
 
 @Component({
   selector: 'app-multi-line',
@@ -18,14 +14,21 @@ export class MultiLineComponent implements OnInit {
 
   data = multiLinesDataset;
 
+  lines: IMultiLineData[][];
+  linesNames: string[] = [];
+
   constructor() {}
 
   ngOnInit(): void {
     this.data = multiLinesDataset;
+    this.linesNames = Object.keys(this.data);
+
+    this.lines = this.linesNames.map((line) => this.data[line]);
 
     console.log(this.data);
     this.onResize();
   }
+
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.windowWidth = window.innerWidth;
@@ -33,21 +36,39 @@ export class MultiLineComponent implements OnInit {
   }
 
   add() {
-    // const lastDate = this.data[this.data.length - 1].timestamp;
-    // const newDataPoint = {
-    //   timestamp: lastDate + 24 * 60 * 60 * 1000,
-    //   value: datatype.number({ min: 50_000, max: 400_000 }),
-    // };
+    this.lines.forEach((line, i) => {
+      const lastDate = line[line.length - 1].timestamp;
 
-    // this.data = [...this.data, newDataPoint];
+      const newDataPoint = {
+        timestamp: lastDate + 24 * 60 * 60 * 1000,
+        value: datatype.number({
+          min: lineMinMax[this.linesNames[i]].min,
+          max: lineMinMax[this.linesNames[i]].max,
+        }),
+      };
+      line.push(newDataPoint);
+
+      this.data[this.linesNames[i]] = line;
+    });
+
+    // cloning obj to trigger mutation
+    this.data = Object.assign({}, this.data);
+
     console.log(this.data);
   }
 
   remove() {
-    // const copy = this.data.slice();
-    // copy.splice(0, 1);
+    const dataCopy = Object.assign({}, this.data);
 
-    // this.data = copy;
+    this.lines.forEach((line, i) => {
+      const lineCopy = line.slice();
+      lineCopy.splice(0, 1);
+
+      dataCopy[this.linesNames[i]] = lineCopy;
+    });
+
+    this.data = dataCopy;
+    this.lines = Object.keys(this.data).map((lineName) => dataCopy[lineName]);
     console.log(this.data);
   }
 }
