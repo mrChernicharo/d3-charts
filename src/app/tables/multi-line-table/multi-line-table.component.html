@@ -1,0 +1,30 @@
+<section class="tables-container">
+  <ng-container *ngFor="let line of lines; let i = index">
+    <table>
+      <thead>
+        <div class="table-title-container">
+          <h2 [ngStyle]="{ color: colors[i] }">{{ linesNames[i] }}</h2>
+        </div>
+      </thead>
+
+      <thead>
+        <th *ngFor="let headerItem of ['date', 'value']">
+          {{ headerItem }}
+        </th>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let row of line; even as isEven"
+          [ngStyle]="{
+            background: isEven ? colors[i] : 'white',
+            color: isEven ? 'white' : colors[i]
+          }"
+        >
+          <td>{{ row.timestamp | date }}</td>
+          <td class="curr">{{ row.value | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</section>

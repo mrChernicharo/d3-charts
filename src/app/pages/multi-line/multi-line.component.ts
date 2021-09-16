@@ -23,6 +23,7 @@ export class MultiLineComponent implements OnInit {
   ngOnInit(): void {
     this.data = multiLinesDataset;
 
+    console.log(this.data);
     this.onResize();
   }
   @HostListener('window:resize', ['$event'])
