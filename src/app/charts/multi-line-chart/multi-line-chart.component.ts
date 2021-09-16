@@ -15,7 +15,7 @@ export class MultiLineChartComponent implements OnInit {
   @Input() outerMargins: number;
   height = 400;
   // colors = ['orange', 'orangered', 'red', 'crimson'];
-  colors = ['royalblue', 'dodgerblue', 'lightblue'];
+  colors = ['blue', 'royalblue', 'dodgerblue', 'lightblue'];
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
   constructor(private currencyPipe: CurrencyPipe) {}
@@ -38,8 +38,7 @@ export class MultiLineChartComponent implements OnInit {
       .append('svg')
       .attr('height', this.height)
       .attr('width', `${this.availableWidth - this.outerMargins}`)
-      .style('transform', `translateX(${this.outerMargins / 2}px)`)
-      .style('border', '1px solid red');
+      .style('transform', `translateX(${this.outerMargins / 2}px)`);
 
     d3.select('svg').append('g').attr('class', 'x-axis');
     d3.select('svg').append('g').attr('class', 'y-axis');
@@ -106,6 +105,7 @@ export class MultiLineChartComponent implements OnInit {
         .curve(d3.curveNatural);
 
       d3.select(`.${lineItem}-path`)
+        .transition()
         .attr('d', lineGen(this.data[lineItem] as any))
         .attr('stroke', this.colors[index])
         .attr('stroke-width', 1)
@@ -129,6 +129,7 @@ export class MultiLineChartComponent implements OnInit {
         .style('cursor', 'pointer');
 
       dots
+        .transition()
         .attr('r', 1)
         .attr('cy', (d) => yScale(d.value))
         .attr('cx', (d) => xScale(d.timestamp))

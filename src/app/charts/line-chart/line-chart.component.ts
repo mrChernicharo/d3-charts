@@ -38,8 +38,7 @@ export class LineChartComponent implements OnInit {
       .append('svg')
       .attr('height', this.height)
       .attr('width', `${this.availableWidth - this.outerMargins}`)
-      .style('transform', `translateX(${this.outerMargins / 2}px)`)
-      .style('border', '1px solid red');
+      .style('transform', `translateX(${this.outerMargins / 2}px)`);
 
     d3.select('svg').append('g').attr('class', 'x-axis');
     d3.select('svg').append('g').attr('class', 'y-axis');
