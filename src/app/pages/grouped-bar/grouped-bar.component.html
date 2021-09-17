@@ -1,0 +1,11 @@
+<app-page-header [title]="title"></app-page-header>
+
+<app-grouped-bar-chart
+  [dataSource]="carsData"
+  [availableWidth]="windowWidth"
+></app-grouped-bar-chart>
+
+<button (click)="addCar()">Add data point</button> |
+<button (click)="popCar()">Remove data point</button>
+
+<app-grouped-bar-table [dataSource]="carsData"></app-grouped-bar-table>

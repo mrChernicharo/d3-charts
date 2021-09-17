@@ -15,7 +15,7 @@ export class MultiLineChartComponent implements OnInit {
   @Input() outerMargins: number;
   height = 400;
   // colors = ['orange', 'orangered', 'red', 'crimson'];
-  colors = ['blue', 'royalblue', 'dodgerblue', 'lightblue'];
+  colors = ['blue', 'royalblue', 'dodgerblue', 'deepskyblue'];
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
   constructor(private currencyPipe: CurrencyPipe) {}
@@ -108,7 +108,7 @@ export class MultiLineChartComponent implements OnInit {
         .transition()
         .attr('d', lineGen(this.data[lineItem] as any))
         .attr('stroke', this.colors[index])
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 2)
         .attr('fill', 'none');
 
       const dots = d3
@@ -122,7 +122,7 @@ export class MultiLineChartComponent implements OnInit {
         .attr('class', (_, i) => `dot dot-${i}`)
         .attr('stroke', this.colors[index])
         .attr('fill', '#fff')
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 2)
         .attr('cx', (d) => xScale(d.timestamp))
         .attr('cy', (d) => yScale(d.value))
         .attr('r', 3)

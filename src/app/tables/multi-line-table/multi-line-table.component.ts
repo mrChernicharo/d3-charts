@@ -12,7 +12,7 @@ export class MultiLineTableComponent implements OnInit {
   @Input() linesData: IMultiLineData[][];
   @Input() linesNames: string[] = [];
 
-  colors = ['blue', 'royalblue', 'dodgerblue', 'lightblue'];
+  colors = ['blue', 'royalblue', 'dodgerblue', 'deepskyblue'];
 
   constructor() {}
 
