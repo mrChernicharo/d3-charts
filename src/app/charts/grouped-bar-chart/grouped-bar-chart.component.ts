@@ -9,6 +9,9 @@ import {
 import * as d3 from 'd3';
 import { IGroupedBarItem } from 'src/app/utils/groupedBarsHelper';
 
+type IDatum = { [key: string]: number };
+type ISeries = d3.Series<IDatum, string>[];
+
 @Component({
   selector: 'app-grouped-bar-chart',
   templateUrl: './grouped-bar-chart.component.html',
@@ -49,9 +52,10 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
     d3.select('.svg').append('g').attr('class', 'y-axis');
   }
   updateChart() {
-    const dataLen = this.dataSource.length;
     const tickSize = 90;
+    const topYOffset = 5;
     const dateFormat = d3.timeFormat('%b/%d'); // abbr.month/day
+    const dataLen = this.dataSource.length;
 
     d3.select('.svg')
       .attr('width', `${this.availableWidth - this.outerMargins}`)
@@ -83,5 +87,29 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
     d3.select('.x-axis')
       .call(xAxis)
       .attr('transform', `translate(0,${this.height - this.margins.bottom})`);
+
+    const yScale = d3
+      .scaleLinear()
+      .domain([getMax(amountSeries) + topYOffset, 0])
+      .range([this.margins.top, this.height - this.margins.bottom]);
+
+    const yAxis = d3
+      .axisLeft(yScale)
+      .tickSizeOuter(0)
+      .tickSizeInner(
+        this.margins.right + this.margins.left + this.outerMargins - this.availableWidth
+      );
+
+    d3.select('.y-axis')
+      .call(yAxis)
+      .attr('transform', `translate(${this.margins.left}, 0)`)
+      .selectAll('line')
+      .attr('opacity', 0.3);
   }
+}
+
+function getMax(series: ISeries) {
+  const len = series.length;
+
+  return Math.max(...series[len - 1].map((item) => item['1']));
 }

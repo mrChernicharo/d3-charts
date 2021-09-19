@@ -27,11 +27,11 @@ export class GroupedBarComponent implements OnInit {
     this.chartMargins = this.windowWidth < 500 ? 0 : 50;
   }
 
-  addCar() {
+  addItem() {
     this.data = [...this.data];
     console.log(this.data);
   }
-  popCar() {
+  popItem() {
     this.data = [...this.data];
     console.log(this.data);
   }
