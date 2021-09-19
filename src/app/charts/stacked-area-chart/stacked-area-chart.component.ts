@@ -52,11 +52,8 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
     d3.select('.svg').append('g').attr('class', 'x-axis');
     d3.select('.svg').append('g').attr('class', 'y-axis');
 
-    d3.select('.svg')
-      .append('g')
-      .attr('class', 'area-g')
-      .attr('width', this.availableWidth)
-      .attr('height', this.height);
+    d3.select('.svg').append('g').attr('class', 'area-g');
+    d3.select('.svg').append('g').attr('class', 'dots-g');
   }
 
   updateChart() {
@@ -76,8 +73,9 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
 
     const stackGen = d3
       .stack()
-      .keys(['pizzas', 'shakes', 'burgers', 'salads'])
+      .keys(['pizzas', 'burgers', 'salads', 'shakes'])
       .order(d3.stackOrderNone)
+      // .order(d3.stackOrderAppearance)
       .offset(d3.stackOffsetNone);
 
     const amountSeries = stackGen([...this.dataSource] as any[]);
@@ -87,14 +85,10 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
 
     const xScale = d3
       .scaleLinear()
-      .domain([this.dataSource[0].time.getTime(), this.dataSource[dataLen - 1].time.getTime()])
+      .domain([timeSeries[0], timeSeries[dataLen - 1]])
       .range([this.margins.left, this.availableWidth - this.margins.right - this.outerMargins]);
 
-    const xAxis = d3
-      .axisBottom(xScale)
-      .ticks(this.availableWidth / tickSize)
-      .tickFormat(dateFormat)
-      .tickSizeOuter(0);
+    const xAxis = d3.axisBottom(xScale).tickFormat(dateFormat).tickSizeOuter(0);
 
     d3.select('.x-axis')
       .call(xAxis)
@@ -124,7 +118,7 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
 
     const areaGen = d3
       .area()
-      .curve(d3.curveNatural)
+      // .curve(d3.curveNatural)
       .curve(d3.curveStep)
       .x((d, i) => xScale(timeSeries[i]))
       .y1((d, i) => yScale(d[1]))
@@ -138,8 +132,27 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
       .attr('stroke', '#fff')
       .attr('fill', (d, i) => colors[i])
       .attr('d', (d, i) => areaGen(d as any))
-      .attr('opacity', (d, i) => 1 - i * 0.1);
+      .attr('opacity', (d, i) => 1 - (i + 1) * 0.1);
 
-    areaPaths.attr('d', (d, i) => areaGen(d as any));
+    areaPaths.transition().attr('d', (d, i) => areaGen(d as any));
+
+    const concated = [].concat(...amountSeries);
+
+    const dots = d3.select('.dots-g').selectAll('circle').data(concated);
+
+    dots
+      .enter()
+      .append('circle')
+      .attr('cx', (d, i) => xScale(timeSeries[i % timeSeries.length]))
+      .attr('cy', (d, i) => yScale(d[1]))
+      .attr('r', 4)
+      .attr('stroke', '#fff');
+
+    dots
+      // .transition()
+      .attr('cx', (d, i) => xScale(timeSeries[i % timeSeries.length]))
+      .attr('cy', (d, i) => yScale(d[1]));
+
+    dots.exit().transition().remove();
   }
 }

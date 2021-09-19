@@ -1,9 +1,11 @@
+import { datatype } from 'faker';
+
 export interface IStackedAreaItem {
   pizzas: number;
   shakes: number;
   burgers: number;
   salads: number;
-  time: Date;
+  time?: Date;
 }
 
 export const initialStackedData: IStackedAreaItem[] = [
@@ -20,169 +22,22 @@ export const initialStackedData: IStackedAreaItem[] = [
   { pizzas: 16, shakes: 28, burgers: 40, salads: 22, time: new Date(2021, 8, 8) },
   { pizzas: 18, shakes: 23, burgers: 36, salads: 20, time: new Date(2021, 8, 9) },
 ];
+const minMax = (min: number, max: number) => ({ min, max });
 
-// export const initialGroupedData = [
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 10,
-//     time: new Date(2021, 7, 31),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 20,
-//     time: new Date(2021, 7, 31),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 27,
-//     time: new Date(2021, 7, 31),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 9,
-//     time: new Date(2021, 8, 1),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 24,
-//     time: new Date(2021, 8, 1),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 32,
-//     time: new Date(2021, 8, 1),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 11,
-//     time: new Date(2021, 8, 2),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 17,
-//     time: new Date(2021, 8, 2),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 34,
-//     time: new Date(2021, 8, 2),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 14,
-//     time: new Date(2021, 8, 3),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 20,
-//     time: new Date(2021, 8, 3),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 39,
-//     time: new Date(2021, 8, 3),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 7,
-//     time: new Date(2021, 8, 4),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 22,
-//     time: new Date(2021, 8, 4),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 28,
-//     time: new Date(2021, 8, 4),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 14,
-//     time: new Date(2021, 8, 5),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 19,
-//     time: new Date(2021, 8, 5),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 30,
-//     time: new Date(2021, 8, 5),
-//   },
+let offset = 0;
+const latterDate = (offset: number) =>
+  new Date(new Date(2021, 8, 9).getTime() + 24 * 3600 * 1000 * offset);
 
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 5,
-//     time: new Date(2021, 8, 6),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 25,
-//     time: new Date(2021, 8, 6),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 27,
-//     time: new Date(2021, 8, 6),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 6,
-//     time: new Date(2021, 8, 7),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 21,
-//     time: new Date(2021, 8, 7),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 22,
-//     time: new Date(2021, 8, 7),
-//   },
-//   {
-//     product: 'Pizza',
-//     price: 50,
-//     quantity: 10,
-//     time: new Date(2021, 8, 8),
-//   },
-//   {
-//     product: 'Shake',
-//     price: 10,
-//     quantity: 33,
-//     time: new Date(2021, 8, 8),
-//   },
-//   {
-//     product: 'Burger',
-//     price: 20,
-//     quantity: 28,
-//     time: new Date(2021, 8, 8),
-//   },
-// ];
+export const stackedDataFactory = () => {
+  offset++;
+
+  const dataItem = {
+    pizzas: datatype.number(minMax(20, 50)),
+    shakes: datatype.number(minMax(10, 32)),
+    burgers: datatype.number(minMax(16, 46)),
+    salads: datatype.number(minMax(8, 28)),
+    time: latterDate(offset),
+  } as IStackedAreaItem;
+
+  return dataItem;
+};

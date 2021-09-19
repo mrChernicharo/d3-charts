@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
-import { initialStackedData } from 'src/app/utils/StackedAreasHelper';
+import { initialStackedData, stackedDataFactory } from 'src/app/utils/stackedAreasHelper';
 
 @Component({
   selector: 'app-stacked-area',
@@ -28,8 +28,8 @@ export class StackedAreaComponent implements OnInit {
   }
 
   addItem() {
-    this.data = [...this.data];
-    console.log(this.data);
+    const newData = stackedDataFactory();
+    this.data = [...this.data, newData];
   }
   popItem() {
     this.data = [...this.data];
