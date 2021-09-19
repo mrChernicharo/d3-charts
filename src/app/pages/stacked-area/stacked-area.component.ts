@@ -1,14 +1,14 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
-import { initialGroupedData } from 'src/app/utils/groupedBarsHelper';
+import { initialStackedData } from 'src/app/utils/StackedAreasHelper';
 
 @Component({
-  selector: 'app-grouped-bar',
-  templateUrl: './grouped-bar.component.html',
-  styleUrls: ['./grouped-bar.component.scss'],
+  selector: 'app-stacked-area',
+  templateUrl: './stacked-area.component.html',
+  styleUrls: ['./stacked-area.component.scss'],
 })
-export class GroupedBarComponent implements OnInit {
-  title = 'grouped bars';
+export class StackedAreaComponent implements OnInit {
+  title = 'Stacked Areas';
   data = [];
   windowWidth = 0;
   chartMargins = 0;
@@ -16,7 +16,7 @@ export class GroupedBarComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.data = initialGroupedData;
+    this.data = initialStackedData;
 
     this.onResize();
   }

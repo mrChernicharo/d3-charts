@@ -7,19 +7,19 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import * as d3 from 'd3';
-import { IGroupedBarItem } from 'src/app/utils/groupedBarsHelper';
+import { IStackedAreaItem } from 'src/app/utils/stackedAreasHelper';
 
 type IDatum = { [key: string]: number };
 type ISeries = d3.Series<IDatum, string>[];
 
 @Component({
-  selector: 'app-grouped-bar-chart',
-  templateUrl: './grouped-bar-chart.component.html',
-  styleUrls: ['./grouped-bar-chart.component.scss'],
+  selector: 'app-stacked-area-chart',
+  templateUrl: './stacked-area-chart.component.html',
+  styleUrls: ['./stacked-area-chart.component.scss'],
   // encapsulation: ViewEncapsulation.None,
 })
-export class GroupedBarChartComponent implements OnInit, OnChanges {
-  @Input() dataSource: IGroupedBarItem[];
+export class StackedAreaChartComponent implements OnInit, OnChanges {
+  @Input() dataSource: IStackedAreaItem[];
   @Input() availableWidth: number;
   @Input() outerMargins: number;
   height = 400;
@@ -41,7 +41,7 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
   }
 
   drawChart() {
-    d3.select('#grouped-bar')
+    d3.select('#stacked-area')
       .append('svg')
       .attr('class', 'svg')
       .attr('height', this.height)
@@ -125,6 +125,7 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
     const areaGen = d3
       .area()
       .curve(d3.curveNatural)
+      .curve(d3.curveStep)
       .x((d, i) => xScale(timeSeries[i]))
       .y1((d, i) => yScale(d[1]))
       .y0((d, i) => yScale(d[0]));
@@ -134,6 +135,7 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
     areaPaths
       .enter()
       .append('path')
+      .attr('stroke', '#fff')
       .attr('fill', (d, i) => colors[i])
       .attr('d', (d, i) => areaGen(d as any))
       .attr('opacity', (d, i) => 1 - i * 0.1);

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BarComponent } from './pages/bar/bar.component';
 import { BasicUpdateComponent } from './pages/basic-update/basic-update.component';
-import { GroupedBarComponent } from './pages/grouped-bar/grouped-bar.component';
+import { StackedAreaComponent } from './pages/stacked-area/stacked-area.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LineComponent } from './pages/line/line.component';
 import { MultiLineComponent } from './pages/multi-line/multi-line.component';
@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'pie', component: PieComponent },
   { path: 'line', component: LineComponent },
   { path: 'multi-line', component: MultiLineComponent },
-  { path: 'grouped-bar', component: GroupedBarComponent },
+  { path: 'stacked-area', component: StackedAreaComponent },
 ];
 
 @NgModule({

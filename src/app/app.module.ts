@@ -13,7 +13,7 @@ import { BarModule } from './pages/bar/bar.module';
 import { PieModule } from './pages/pie/pie.module';
 import { LineModule } from './pages/line/line.module';
 import { MultiLineModule } from './pages/multi-line/multi-line.module';
-import { GroupedBarModule } from './pages/grouped-bar/grouped-bar.module';
+import { StackedAreaModule } from './pages/stacked-area/stacked-area.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -28,7 +28,7 @@ import { GroupedBarModule } from './pages/grouped-bar/grouped-bar.module';
     PieModule,
     LineModule,
     MultiLineModule,
-    GroupedBarModule,
+    StackedAreaModule,
   ],
   bootstrap: [AppComponent],
 })

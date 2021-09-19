@@ -1,4 +1,4 @@
-export interface IGroupedBarItem {
+export interface IStackedAreaItem {
   pizzas: number;
   shakes: number;
   burgers: number;
@@ -6,7 +6,7 @@ export interface IGroupedBarItem {
   time: Date;
 }
 
-export const initialGroupedData: IGroupedBarItem[] = [
+export const initialStackedData: IStackedAreaItem[] = [
   { pizzas: 6, shakes: 20, burgers: 35, salads: 12, time: new Date(2021, 7, 29) },
   { pizzas: 11, shakes: 24, burgers: 30, salads: 16, time: new Date(2021, 7, 30) },
   { pizzas: 9, shakes: 22, burgers: 37, salads: 19, time: new Date(2021, 7, 31) },

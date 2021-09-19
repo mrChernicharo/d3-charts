@@ -1,12 +1,12 @@
 <app-page-header [title]="title"></app-page-header>
 
-<app-grouped-bar-chart
+<app-stacked-area-chart
   [dataSource]="data"
   [availableWidth]="windowWidth"
   [outerMargins]="chartMargins"
-></app-grouped-bar-chart>
+></app-stacked-area-chart>
 
 <button (click)="addItem()">Add data point</button> |
 <button (click)="popItem()">Remove data point</button>
 
-<app-grouped-bar-table [dataSource]="data"></app-grouped-bar-table>
+<app-stacked-area-table [dataSource]="data"></app-stacked-area-table>
