@@ -9,13 +9,15 @@ import { initialGroupedData } from 'src/app/utils/groupedBarsHelper';
 })
 export class GroupedBarComponent implements OnInit {
   title = 'grouped bars';
-  carsData = [];
+  data = [];
   windowWidth = 0;
   chartMargins = 0;
+
   constructor() {}
 
   ngOnInit(): void {
-    this.carsData = initialGroupedData;
+    this.data = initialGroupedData;
+
     this.onResize();
   }
 
@@ -26,9 +28,11 @@ export class GroupedBarComponent implements OnInit {
   }
 
   addCar() {
-    console.log(this.carsData);
+    this.data = [...this.data];
+    console.log(this.data);
   }
   popCar() {
-    console.log(this.carsData);
+    this.data = [...this.data];
+    console.log(this.data);
   }
 }
