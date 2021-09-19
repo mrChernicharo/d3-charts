@@ -25,6 +25,7 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
   height = 400;
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
+
   constructor() {}
 
   ngOnInit(): void {
@@ -50,14 +51,26 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
 
     d3.select('.svg').append('g').attr('class', 'x-axis');
     d3.select('.svg').append('g').attr('class', 'y-axis');
+
+    d3.select('.svg')
+      .append('g')
+      .attr('class', 'area-g')
+      .attr('width', this.availableWidth)
+      .attr('height', this.height);
   }
+
   updateChart() {
     const tickSize = 90;
     const topYOffset = 5;
-    const dateFormat = d3.timeFormat('%b/%d'); // abbr.month/day
     const dataLen = this.dataSource.length;
 
-    d3.select('.svg')
+    const dateFormat = d3.timeFormat('%b/%d'); // abbr.month/day
+    const minV = (series: ISeries) => d3.min(series, (d) => d3.min(d, (d) => d3.min(d)));
+    const maxV = (series: ISeries) => d3.max(series, (d) => d3.max(d, (d) => d3.max(d)));
+
+    const svg = d3.select('.svg');
+
+    svg
       .attr('width', `${this.availableWidth - this.outerMargins}`)
       .style('transform', `translateX(${this.outerMargins / 2}px)`);
 
@@ -68,8 +81,7 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
       .offset(d3.stackOffsetNone);
 
     const amountSeries = stackGen([...this.dataSource] as any[]);
-
-    console.log(amountSeries);
+    const timeSeries = this.dataSource.map((d) => d.time.getTime());
 
     //********************************************************//
 
@@ -90,7 +102,7 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
 
     const yScale = d3
       .scaleLinear()
-      .domain([getMax(amountSeries) + topYOffset, 0])
+      .domain([maxV(amountSeries) + topYOffset, 0])
       .range([this.margins.top, this.height - this.margins.bottom]);
 
     const yAxis = d3
@@ -105,11 +117,27 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
       .attr('transform', `translate(${this.margins.left}, 0)`)
       .selectAll('line')
       .attr('opacity', 0.3);
+
+    // *************************************************//
+
+    const colors = d3.schemeSpectral[amountSeries.length];
+
+    const areaGen = d3
+      .area()
+      .curve(d3.curveNatural)
+      .x((d, i) => xScale(timeSeries[i]))
+      .y1((d, i) => yScale(d[1]))
+      .y0((d, i) => yScale(d[0]));
+
+    const areaPaths = d3.select('.area-g').selectAll('path').data(amountSeries);
+
+    areaPaths
+      .enter()
+      .append('path')
+      .attr('fill', (d, i) => colors[i])
+      .attr('d', (d, i) => areaGen(d as any))
+      .attr('opacity', (d, i) => 1 - i * 0.1);
+
+    areaPaths.attr('d', (d, i) => areaGen(d as any));
   }
-}
-
-function getMax(series: ISeries) {
-  const len = series.length;
-
-  return Math.max(...series[len - 1].map((item) => item['1']));
 }
