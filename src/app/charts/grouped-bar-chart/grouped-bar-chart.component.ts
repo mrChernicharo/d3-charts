@@ -44,8 +44,15 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
       .attr('width', `${this.availableWidth - this.outerMargins}`)
       .style('transform', `translateX(${this.outerMargins / 2}px)`)
       .style('border', '1px solid forestgreen');
+
+    d3.select('.svg').append('g').attr('class', 'x-axis');
+    d3.select('.svg').append('g').attr('class', 'y-axis');
   }
   updateChart() {
+    const dataLen = this.dataSource.length;
+    const tickSize = 90;
+    const dateFormat = d3.timeFormat('%b/%d'); // abbr.month/day
+
     d3.select('.svg')
       .attr('width', `${this.availableWidth - this.outerMargins}`)
       .style('transform', `translateX(${this.outerMargins / 2}px)`);
@@ -56,8 +63,25 @@ export class GroupedBarChartComponent implements OnInit, OnChanges {
       .order(d3.stackOrderNone)
       .offset(d3.stackOffsetNone);
 
-    const series = stackGen([...this.dataSource] as any[]);
+    const amountSeries = stackGen([...this.dataSource] as any[]);
 
-    console.log(series);
+    console.log(amountSeries);
+
+    //********************************************************//
+
+    const xScale = d3
+      .scaleLinear()
+      .domain([this.dataSource[0].time.getTime(), this.dataSource[dataLen - 1].time.getTime()])
+      .range([this.margins.left, this.availableWidth - this.margins.right - this.outerMargins]);
+
+    const xAxis = d3
+      .axisBottom(xScale)
+      .ticks(this.availableWidth / tickSize)
+      .tickFormat(dateFormat)
+      .tickSizeOuter(0);
+
+    d3.select('.x-axis')
+      .call(xAxis)
+      .attr('transform', `translate(0,${this.height - this.margins.bottom})`);
   }
 }
