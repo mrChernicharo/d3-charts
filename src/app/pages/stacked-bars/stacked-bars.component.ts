@@ -1,5 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { initialStackedBars, stackedBarFactory } from '../../utils/stackedBarsHelper';
+import {
+  initialStackedBars,
+  stackedBarFactory,
+  restartDateOffset,
+} from '../../utils/stackedBarsHelper';
 @Component({
   selector: 'app-stacked-bars',
   templateUrl: './stacked-bars.component.html',
@@ -11,7 +15,9 @@ export class StackedBarsComponent implements OnInit {
   windowWidth = 0;
   chartMargins = 0;
 
-  constructor() {}
+  constructor() {
+    restartDateOffset();
+  }
 
   ngOnInit(): void {
     this.data = initialStackedBars;

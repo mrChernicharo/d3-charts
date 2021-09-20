@@ -44,3 +44,7 @@ export const stackedDataFactory = () => {
 
   return dataItem;
 };
+
+export const restartDateOffset = () => {
+  offset = 0;
+};

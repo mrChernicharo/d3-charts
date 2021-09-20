@@ -1,6 +1,10 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { timer } from 'rxjs';
-import { initialStackedData, stackedDataFactory } from 'src/app/utils/stackedAreasHelper';
+import {
+  initialStackedData,
+  restartDateOffset,
+  stackedDataFactory,
+} from 'src/app/utils/stackedAreasHelper';
 
 @Component({
   selector: 'app-stacked-area',
@@ -13,7 +17,9 @@ export class StackedAreaComponent implements OnInit {
   windowWidth = 0;
   chartMargins = 0;
 
-  constructor() {}
+  constructor() {
+    restartDateOffset();
+  }
 
   ngOnInit(): void {
     this.data = initialStackedData;
