@@ -1,5 +1,8 @@
 import { datatype } from 'faker';
 
+export type IDatum = { [key: string]: number };
+export type ISeries = d3.Series<IDatum, string>[];
+
 export interface IStackedAreaItem {
   pizzas: number;
   shakes: number;

@@ -9,10 +9,7 @@ import {
 } from '@angular/core';
 import * as d3 from 'd3';
 import { timer } from 'rxjs';
-import { IStackedAreaItem } from 'src/app/utils/stackedAreasHelper';
-
-type IDatum = { [key: string]: number };
-type ISeries = d3.Series<IDatum, string>[];
+import { ISeries, IStackedAreaItem } from 'src/app/utils/stackedAreasHelper';
 
 @Component({
   selector: 'app-stacked-area-chart',
@@ -149,7 +146,7 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
       .area()
       // .curve(d3.curveNatural)
       // .curve(d3.curveStep)
-      .curve(d3.curveCardinal.tension(0.1))
+      // .curve(d3.curveCardinal.tension(0.1))
       .x((d, i) => xScale(timeSeries[i]))
       .y1((d, i) => yScale(d[1]))
       .y0((d, i) => yScale(d[0]));
