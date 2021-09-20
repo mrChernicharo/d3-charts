@@ -1,0 +1,10 @@
+<app-page-header [title]="title"></app-page-header>
+
+<app-stacked-bars-chart
+  [dataSource]="data"
+  [availableWidth]="windowWidth"
+  [outerMargins]="chartMargins"
+></app-stacked-bars-chart>
+
+<button (click)="addItem()">Add data point</button> |
+<button (click)="popItem()">Remove data point</button>

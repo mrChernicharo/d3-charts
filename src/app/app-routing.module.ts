@@ -7,6 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { LineComponent } from './pages/line/line.component';
 import { MultiLineComponent } from './pages/multi-line/multi-line.component';
 import { PieComponent } from './pages/pie/pie.component';
+import { StackedBarsComponent } from './pages/stacked-bars/stacked-bars.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'line', component: LineComponent },
   { path: 'multi-line', component: MultiLineComponent },
   { path: 'stacked-area', component: StackedAreaComponent },
+  { path: 'stacked-bars', component: StackedBarsComponent },
 ];
 
 @NgModule({

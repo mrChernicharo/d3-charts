@@ -108,7 +108,7 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
     //********************************************************//
 
     const xScale = d3
-      .scaleLinear()
+      .scaleTime()
       .domain([timeSeries[0], timeSeries[dataLen - 1]])
       .range([this.margins.left, this.availableWidth - this.margins.right - this.outerMargins]);
 

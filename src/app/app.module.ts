@@ -14,6 +14,7 @@ import { PieModule } from './pages/pie/pie.module';
 import { LineModule } from './pages/line/line.module';
 import { MultiLineModule } from './pages/multi-line/multi-line.module';
 import { StackedAreaModule } from './pages/stacked-area/stacked-area.module';
+import { StackedBarsModule } from './pages/stacked-bars/stacked-bars.module';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -29,6 +30,7 @@ import { StackedAreaModule } from './pages/stacked-area/stacked-area.module';
     LineModule,
     MultiLineModule,
     StackedAreaModule,
+    StackedBarsModule,
   ],
   bootstrap: [AppComponent],
 })
