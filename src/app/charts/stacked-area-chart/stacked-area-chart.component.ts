@@ -3,10 +3,12 @@ import {
   Input,
   OnChanges,
   OnInit,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import * as d3 from 'd3';
+import { timer } from 'rxjs';
 import { IStackedAreaItem } from 'src/app/utils/stackedAreasHelper';
 
 type IDatum = { [key: string]: number };
@@ -26,17 +28,20 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
 
+  tooltip;
+
   constructor() {}
 
   ngOnInit(): void {
     this.drawChart();
-    this.updateChart();
+    timer(100).subscribe(() => this.updateChart());
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
     if (changes.dataSource || changes.availableWidth) {
       this.updateChart();
+      timer(0).subscribe(() => this.updateChart());
     }
   }
 
@@ -54,6 +59,25 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
 
     d3.select('.svg').append('g').attr('class', 'area-g');
     d3.select('.svg').append('g').attr('class', 'dots-g');
+
+    this.tooltip = d3
+      .select('#stacked-area')
+      .append('div')
+      .attr('class', 'tooltip')
+      .style('position', 'absolute')
+      .style('opacity', 0)
+      .style('background', '#454545')
+      .style('color', '#fff')
+      .style('font-size', '12px')
+      .style('height', '24px')
+      // .style('width', '160px')
+      .style('padding', '10px')
+      .style('display', 'flex')
+      .style('align-items', 'center')
+      .style('pointer-events', 'none')
+      .style('justify-content', 'center');
+
+    this.updateChart();
   }
 
   updateChart() {
@@ -75,8 +99,8 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
       .stack()
       .keys(['pizzas', 'burgers', 'salads', 'shakes'])
       .order(d3.stackOrderNone)
-      // .order(d3.stackOrderAppearance)
       .offset(d3.stackOffsetNone);
+    // .order(d3.stackOrderAppearance)
 
     const amountSeries = stackGen([...this.dataSource] as any[]);
     const timeSeries = this.dataSource.map((d) => d.time.getTime());
@@ -88,7 +112,12 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
       .domain([timeSeries[0], timeSeries[dataLen - 1]])
       .range([this.margins.left, this.availableWidth - this.margins.right - this.outerMargins]);
 
-    const xAxis = d3.axisBottom(xScale).tickFormat(dateFormat).tickSizeOuter(0);
+    const xAxis = d3
+      .axisBottom(xScale)
+      .ticks(this.availableWidth / tickSize)
+      .tickFormat(dateFormat)
+      .tickSizeOuter(0)
+      .tickPadding(3);
 
     d3.select('.x-axis')
       .call(xAxis)
@@ -119,7 +148,8 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
     const areaGen = d3
       .area()
       // .curve(d3.curveNatural)
-      .curve(d3.curveStep)
+      // .curve(d3.curveStep)
+      .curve(d3.curveCardinal.tension(0.1))
       .x((d, i) => xScale(timeSeries[i]))
       .y1((d, i) => yScale(d[1]))
       .y0((d, i) => yScale(d[0]));
@@ -129,30 +159,90 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
     areaPaths
       .enter()
       .append('path')
+      .attr('class', (d, i) => `area-${i}-${d.key}`)
+      .attr('d', (d, i) => areaGen(d as any))
       .attr('stroke', '#fff')
       .attr('fill', (d, i) => colors[i])
-      .attr('d', (d, i) => areaGen(d as any))
       .attr('opacity', (d, i) => 1 - (i + 1) * 0.1);
 
     areaPaths.transition().attr('d', (d, i) => areaGen(d as any));
 
-    const concated = [].concat(...amountSeries);
+    const concated: [number, number][] = [].concat(...amountSeries);
+
+    const dotsData = ['pizzas', 'burgers', 'salads', 'shakes'].map((k, i) => ({
+      [k]: this.dataSource.map((item) => ({ product: k, amount: item[k], time: item.time })),
+    }));
+
+    const concatedDotsData = [].concat(
+      ...dotsData.map((prodArr) => [].concat(...Object.values(prodArr)))
+    );
 
     const dots = d3.select('.dots-g').selectAll('circle').data(concated);
 
     dots
       .enter()
       .append('circle')
+      .attr('class', (d, i) => `dot-${i}`)
+      .attr('data-dot-item', (d, i) => JSON.stringify(concatedDotsData[i]))
       .attr('cx', (d, i) => xScale(timeSeries[i % timeSeries.length]))
       .attr('cy', (d, i) => yScale(d[1]))
-      .attr('r', 4)
-      .attr('stroke', '#fff');
+      .attr('r', 0)
+      .transition()
+      .duration(600)
+      .attr('fill', (d, i) => colors[Math.floor(i / timeSeries.length)])
+      .attr('r', 3);
 
     dots
-      // .transition()
+      .attr('cy', (d, i) => yScale(d[1]))
       .attr('cx', (d, i) => xScale(timeSeries[i % timeSeries.length]))
-      .attr('cy', (d, i) => yScale(d[1]));
+      .attr('r', 0)
+      .transition()
+      .duration(600)
+      .attr('data-dot-item', (d, i) => JSON.stringify(concatedDotsData[i]))
+      .attr('fill', (d, i) => colors[Math.floor(i / timeSeries.length)])
+      .attr('stroke', '#fff')
+      .attr('r', 3);
 
-    dots.exit().transition().remove();
+    dots.exit().attr('r', 0).transition().duration(600).remove();
+
+    //*************************** */
+
+    console.log({
+      dataSource: this.dataSource,
+      concated,
+      amountSeries,
+      dotNodes: dots.nodes(),
+      dotsData,
+      concatedDotsData,
+    });
+
+    dots.on('mousemove', (e: MouseEvent, d) => {
+      const dotData = e.target['dataset'];
+
+      const tooltipData = JSON.parse(dotData.dotItem);
+
+      const { product, amount, time } = tooltipData;
+
+      const splitDate = time.split('-');
+      const day = (splitDate[2] as string).match(/[0-9]+/)[0];
+      const date = new Date(splitDate[0], splitDate[1] - 1, +day);
+
+      const [x, y] = [e.x, e.y];
+
+      this.tooltip
+        .transition()
+        .style('opacity', 1)
+        .style('top', `${e.y - 50}px`)
+        .style('left', `${e.x > this.availableWidth / 2 ? e.x - 100 + 'px' : 'unset'}`)
+        .style(
+          'right',
+          `${e.x < this.availableWidth / 2 ? this.availableWidth - 100 - e.x + 'px' : 'unset'}`
+        )
+        .text(`${dateFormat(date)}: ${amount} ${product}`);
+    });
+    dots.on('mouseout', (e) => {
+      console.log('out');
+      this.tooltip.transition().style('opacity', 0);
+    });
   }
 }
