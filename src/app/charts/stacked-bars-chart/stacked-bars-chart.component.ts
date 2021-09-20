@@ -24,8 +24,10 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-    this.update();
+    if (changes.dataSource || changes.availableWidth) {
+      console.log(changes);
+      this.update();
+    }
   }
 
   drawChart() {
@@ -47,10 +49,12 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
     const tickSize = 90;
     const topYOffset = 5;
     const dataLen = this.dataSource.length;
+    const dayDuration = 24 * 3600 * 1000;
     const maxV = (series: ISeries) => d3.max(series, (d) => d3.max(d, (d) => d3.max(d)));
     const dateFormat = d3.timeFormat('%b/%d'); // abbr.month/day
 
-    d3.select('svg')
+    const svg = d3
+      .select('svg')
       .attr('width', `${this.availableWidth - this.outerMargins}`)
       .style('transform', `translateX(${this.outerMargins / 2}px)`);
 
@@ -63,10 +67,12 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
 
     const amountSeries = stackGen([...this.dataSource] as any[]);
     const timeSeries = this.dataSource.map((d) => d.time.getTime());
+    const barWidth =
+      (this.availableWidth - this.margins.left - this.margins.right) / timeSeries.length / 1.4;
 
     const scaleX = d3
       .scaleTime()
-      .domain([timeSeries[0], timeSeries[dataLen - 1]])
+      .domain([timeSeries[0] - dayDuration, timeSeries[dataLen - 1] + dayDuration])
       .range([this.margins.left, this.availableWidth - this.margins.right - this.outerMargins]);
 
     const xAxis = d3
@@ -97,5 +103,26 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
       .attr('transform', `translate(${this.margins.left}, 0)`)
       .selectAll('line')
       .attr('opacity', 0.3);
+
+    const colors = d3.schemeSpectral[amountSeries.length];
+
+    const barsG = d3
+      .select('.bars-g')
+      .selectAll('g')
+      .data(amountSeries)
+      .join('g')
+      .attr('fill', (d, i) => colors[i])
+      .selectAll('rect')
+      .data((d) => d)
+      .join(
+        (enter) => enter.append('rect'),
+        (update) => update,
+        (exit) => exit.remove()
+      )
+      .attr('x', (d, i) => scaleX(d.data.time) - barWidth / 2)
+      .attr('y', (d, i) => scaleY(d[1]))
+      .attr('height', (d, i) => scaleY(d[0]) - scaleY(d[1]))
+      .transition()
+      .attr('width', (d, i) => barWidth);
   }
 }
