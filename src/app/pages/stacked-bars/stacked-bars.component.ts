@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { initialStackedData, stackedDataFactory } from 'src/app/utils/stackedAreasHelper';
-
+import { initialStackedBars, stackedBarFactory } from '../../utils/stackedBarsHelper';
 @Component({
   selector: 'app-stacked-bars',
   templateUrl: './stacked-bars.component.html',
@@ -15,7 +14,7 @@ export class StackedBarsComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.data = initialStackedData;
+    this.data = initialStackedBars;
 
     this.onResize();
   }
@@ -27,7 +26,7 @@ export class StackedBarsComponent implements OnInit {
   }
 
   addItem() {
-    const newData = stackedDataFactory();
+    const newData = stackedBarFactory();
     this.data = [...this.data, newData];
   }
   popItem() {

@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import * as d3 from 'd3';
-import { ISeries } from 'src/app/utils/stackedAreasHelper';
+import { ISeries } from 'src/app/utils/stackedBarsHelper';
 
 @Component({
   selector: 'app-stacked-bars-chart',
@@ -17,6 +17,7 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
 
   tooltip;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -60,7 +61,7 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
 
     const stackGen = d3
       .stack()
-      .keys(['pizzas', 'burgers', 'salads', 'shakes'])
+      .keys(['pizzas', 'burgers', 'beers', 'salads', 'shakes'])
       .order(d3.stackOrderNone)
       .offset(d3.stackOffsetNone);
     // .order(d3.stackOrderAppearance)
