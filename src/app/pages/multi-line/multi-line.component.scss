@@ -1,4 +1,8 @@
 .btn-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+
   button:hover {
     opacity: 0.6;
     cursor: pointer;

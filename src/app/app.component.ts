@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { createItem, ICar, initialCars } from './utils/barHelper';
+import { ICar, initialCars } from './utils/barHelper';
 import { vehicle } from 'faker';
 import {
   ActivatedRoute,

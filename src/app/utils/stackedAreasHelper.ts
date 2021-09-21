@@ -35,7 +35,7 @@ export const stackedDataFactory = () => {
   offset++;
 
   const dataItem = {
-    pizzas: datatype.number(minMax(20, 50)),
+    pizzas: datatype.number(minMax(2, 20)),
     shakes: datatype.number(minMax(10, 32)),
     burgers: datatype.number(minMax(16, 46)),
     salads: datatype.number(minMax(8, 28)),

@@ -17,6 +17,8 @@ export class MultiLineComponent implements OnInit {
   lines: IMultiLineData[][];
   linesNames: string[] = [];
 
+  colors = ['purple', 'crimson', 'orange', 'royalblue'];
+
   constructor() {}
 
   ngOnInit(): void {

@@ -1,20 +1,31 @@
 .tables-container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-
-  table {
-    width: clamp(200px, 33%, 400px);
-  }
+  padding-inline: 2rem;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 1rem;
 
   .table-title-container {
     // border: 1px solid;
     width: 200%;
     text-align: center;
+    margin-top: 2rem;
+  }
+
+  td.currency {
+    text-align: end;
   }
 }
-@media screen and (min-width: 600px) {
+@media screen and (max-width: 820px) {
   .tables-container {
-    flex-direction: row;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .tables-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
   }
 }

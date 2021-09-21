@@ -4,6 +4,7 @@
   [data]="data"
   [availableWidth]="windowWidth"
   [outerMargins]="chartMargins"
+  [colors]="colors"
 ></app-multi-line-chart>
 
 <div class="btn-container">
@@ -11,4 +12,8 @@
   <button (click)="add()">Add Point</button>
 </div>
 
-<app-multi-line-table [linesData]="lines" [linesNames]="linesNames"></app-multi-line-table>
+<app-multi-line-table
+  [linesData]="lines"
+  [linesNames]="linesNames"
+  [colors]="colors"
+></app-multi-line-table>

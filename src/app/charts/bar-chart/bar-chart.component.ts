@@ -22,8 +22,8 @@ export class BarChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // console.log(changes);
     if (changes.dataSource || changes.availableWidth) {
+      console.log(changes);
       this.update();
     }
   }
