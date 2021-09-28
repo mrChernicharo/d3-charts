@@ -14,7 +14,7 @@ export type IMultiLineDataset = {
 
 const timestampsArray = [
   1623416480000, 1623330080000, 1623243680000, 1623157280000, 1623070880000, 1622984480000,
-  1622898080000, 1622811680000, 1622725280000, 1622638880000, 1622552480000, 1622466080000,
+  // 1622898080000, 1622811680000, 1622725280000, 1622638880000, 1622552480000, 1622466080000,
 ].reverse();
 
 const valuesFactory = (min: number, max: number): IMultiLineData[] => {
@@ -29,8 +29,8 @@ const valuesFactory = (min: number, max: number): IMultiLineData[] => {
 export const lineMinMax = {
   line1: { min: 10_000, max: 100_000 },
   line2: { min: 100_000, max: 200_000 },
-  line3: { min: 200_000, max: 400_000 },
-  line4: { min: 400_000, max: 500_000 },
+  line3: { min: 190_000, max: 320_000 },
+  line4: { min: 300_000, max: 500_000 },
 };
 
 const line1Values = valuesFactory(lineMinMax.line1.min, lineMinMax.line1.max);

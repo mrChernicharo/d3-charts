@@ -12,7 +12,7 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
   @Input() availableWidth;
   @Input() outerMargins;
 
-  height = 400;
+  height = 300;
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
 
@@ -36,8 +36,8 @@ export class StackedBarsChartComponent implements OnInit, OnChanges {
       .append('svg')
       .attr('height', this.height)
       .attr('width', `${this.availableWidth - this.outerMargins}`)
-      .style('transform', `translateX(${this.outerMargins / 2}px)`)
-      .style('border', '1px solid');
+      .style('transform', `translateX(${this.outerMargins / 2}px)`);
+    // .style('border', '1px solid');
 
     d3.select('svg').append('g').attr('class', 'x-axis-g');
     d3.select('svg').append('g').attr('class', 'y-axis-g');

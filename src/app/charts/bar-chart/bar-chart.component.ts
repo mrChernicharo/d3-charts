@@ -11,7 +11,7 @@ export class BarChartComponent implements OnInit, OnChanges {
   @Input() dataSource: ICar[];
   @Input() availableWidth: number;
 
-  height = 400;
+  height = 300;
   margins = 50;
 
   constructor() {}
@@ -35,7 +35,7 @@ export class BarChartComponent implements OnInit, OnChanges {
       .append('svg')
       .attr('width', this.availableWidth - this.margins * 2)
       .attr('height', this.height)
-      .style('border', '1px solid green')
+      // .style('border', '1px solid green')
       .style('transform', 'translateX(48px) rotateX(180deg)'); // margin - borders
 
     const g = d3.select('svg').append('g');

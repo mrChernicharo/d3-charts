@@ -14,7 +14,7 @@ export class MultiLineChartComponent implements OnInit {
   @Input() availableWidth: number;
   @Input() outerMargins: number;
   @Input() colors;
-  height = 400;
+  height = 300;
   // colors = ['orange', 'orangered', 'red', 'crimson'];
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
@@ -101,8 +101,8 @@ export class MultiLineChartComponent implements OnInit {
         .line()
         .x((d, i) => xScale((this.data[lineItem] as IMultiLineData)[i].timestamp))
         .y((d, i) => yScale((this.data[lineItem] as IMultiLineData)[i].value))
-        // .curve(d3.curveCardinal.tension(0.7));
-        .curve(d3.curveNatural);
+        .curve(d3.curveCardinal.tension(0.7));
+      // .curve(d3.curveNatural);
 
       d3.select(`.${lineItem}-path`)
         .transition()

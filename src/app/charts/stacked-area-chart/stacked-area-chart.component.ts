@@ -21,7 +21,7 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
   @Input() dataSource: IStackedAreaItem[];
   @Input() availableWidth: number;
   @Input() outerMargins: number;
-  height = 400;
+  height = 300;
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };
 
@@ -48,8 +48,8 @@ export class StackedAreaChartComponent implements OnInit, OnChanges {
       .attr('class', 'svg')
       .attr('height', this.height)
       .attr('width', `${this.availableWidth - this.outerMargins}`)
-      .style('transform', `translateX(${this.outerMargins / 2}px)`)
-      .style('border', '1px solid forestgreen');
+      .style('transform', `translateX(${this.outerMargins / 2}px)`);
+    // .style('border', '1px solid forestgreen');
 
     d3.select('.svg').append('g').attr('class', 'x-axis');
     d3.select('.svg').append('g').attr('class', 'y-axis');

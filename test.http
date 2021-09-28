@@ -3,13 +3,17 @@ Content-Type: application/json
 
 ###
 
+GET http://127.0.0.1:3333/all HTTP/1.1
+Content-Type: application/json
+
+###
 
 
-POST http://127.0.0.1:61650/v1/sales/summary HTTP/1.1
+POST http://127.0.0.1:3333/product HTTP/1.1
 Content-Type: application/json
 
 {
-    "start": "1630465200",
-    "end": "1630551600",
+    "prod": "pencil",
+    "price": 2
 }
 

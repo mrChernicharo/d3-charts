@@ -13,7 +13,7 @@ export class LineChartComponent implements OnInit {
   @Input() data: ILineData[];
   @Input() availableWidth: number;
   @Input() outerMargins: number;
-  height = 400;
+  height = 300;
   colors = ['orange', 'orangered', 'red', 'crimson'];
 
   margins = { top: 20, bottom: 32, left: 60, right: 48 };

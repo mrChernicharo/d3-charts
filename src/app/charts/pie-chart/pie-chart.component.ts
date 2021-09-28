@@ -12,6 +12,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   @Input() availableWidth: number;
   @Input() margins: number;
   colors = ['orange', 'coral', 'red', 'purple', 'magenta'];
+  height = 300;
 
   constructor() {}
 
@@ -34,7 +35,7 @@ export class PieChartComponent implements OnInit, OnChanges {
       .append('svg')
       .attr('width', this.availableWidth - this.margins * 2)
       .attr('height', '100%')
-      .style('border', '1px solid green')
+      // .style('border', '1px solid green')
       .style('transform', `translateX(${this.margins - 2}px)`); // margin - borders
 
     const g = d3
@@ -46,7 +47,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   update() {
     // resize chart's width
     const width = this.availableWidth - this.margins * 2;
-    const radius = Math.min(this.availableWidth, 400) * 0.3;
+    const radius = Math.min(this.availableWidth, this.height) * 0.3;
     const arrValues = Object.values(this.dataSource.ageGroups);
 
     // transition
